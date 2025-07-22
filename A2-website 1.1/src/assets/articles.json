@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "How to Manage Exam Stress",
+    "author": "Mental Health Org",
+    "url": "https://example.com/manage-exam-stress"
+  },
+  {
+    "id": 2,
+    "title": "Tips for Building Resilience",
+    "author": "Healthy Minds",
+    "url": "https://example.com/resilience-tips"
+  },
+  {
+    "id": 3,
+    "title": "Coping with Work Overload",
+    "author": "Workplace Wellness",
+    "url": "https://example.com/work-overload"
+  }
+]
