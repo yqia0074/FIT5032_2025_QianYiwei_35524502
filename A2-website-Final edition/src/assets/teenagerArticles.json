@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Managing Exam Stress",
+    "author": "Teen Mental Health Org",
+    "content": "Exams can be a significant source of stress for teenagers. Here are some effective strategies to manage exam stress: 1) Create a realistic study schedule, 2) Take regular breaks, 3) Practice mindfulness and deep breathing, 4) Maintain a healthy sleep schedule, 5) Talk to someone you trust about your feelings.",
+    "tags": ["stress", "exams", "school"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 2,
+    "title": "Dealing with Peer Pressure",
+    "author": "Youth Support Network",
+    "content": "Peer pressure can be challenging to navigate. Remember that it's okay to say no to things that make you uncomfortable. Build a strong support network of friends who respect your boundaries. Develop confidence in your own values and decisions. If you're feeling pressured, talk to a trusted adult or counselor.",
+    "tags": ["peer pressure", "social", "relationships"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 3,
+    "title": "Healthy Social Media Habits",
+    "author": "Digital Wellbeing Institute",
+    "content": "Social media can impact your mental health. Set time limits for usage, be mindful of comparison traps, curate your feed to include positive content, take regular digital detoxes, and remember that most people only share their highlights online, not their struggles.",
+    "tags": ["social media", "digital wellbeing", "screen time"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 4,
+    "title": "Understanding Teenage Anxiety",
+    "author": "Teen Psychology Center",
+    "content": "Anxiety is common among teenagers. Symptoms can include racing thoughts, difficulty concentrating, restlessness, and physical symptoms like headaches or stomach aches. Coping strategies include regular exercise, adequate sleep, limiting caffeine, practicing relaxation techniques, and seeking professional help when needed.",
+    "tags": ["anxiety", "mental health", "coping strategies"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 5,
+    "title": "Building Healthy Relationships",
+    "author": "Teen Counseling Services",
+    "content": "Healthy relationships are based on mutual respect, trust, and communication. Learn to recognize red flags in relationships, set appropriate boundaries, communicate your feelings clearly, and understand that it's okay to end relationships that are harmful to your wellbeing.",
+    "tags": ["relationships", "communication", "boundaries"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  }
+]

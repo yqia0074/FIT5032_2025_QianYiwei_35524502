@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Managing Workplace Stress",
+    "author": "Occupational Health Institute",
+    "content": "Workplace stress can significantly impact your mental and physical health. Effective strategies include: setting clear boundaries between work and personal life, practicing time management techniques, taking regular breaks, communicating openly with supervisors about workload, and engaging in stress-reduction activities like exercise or meditation.",
+    "tags": ["workplace", "stress management", "burnout prevention"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 2,
+    "title": "Work-Life Balance in the Digital Age",
+    "author": "Professional Wellbeing Association",
+    "content": "Maintaining work-life balance is increasingly challenging in our always-connected world. Consider implementing strategies such as: setting specific work hours and sticking to them, creating a dedicated workspace separate from relaxation areas, using technology tools to manage notifications, and scheduling regular time for family, friends, and personal interests.",
+    "tags": ["work-life balance", "digital boundaries", "wellbeing"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 3,
+    "title": "Preventing Burnout in High-Pressure Careers",
+    "author": "Career Mental Health Center",
+    "content": "Burnout is characterized by emotional exhaustion, cynicism, and reduced professional efficacy. Warning signs include chronic fatigue, insomnia, irritability, and decreased performance. Prevention strategies include: recognizing early warning signs, practicing self-care, setting realistic goals, delegating when possible, and seeking support from colleagues, friends, or mental health professionals.",
+    "tags": ["burnout", "career stress", "self-care"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 4,
+    "title": "Effective Communication in the Workplace",
+    "author": "Professional Development Institute",
+    "content": "Good communication is essential for workplace wellbeing. Practice active listening, be clear and concise in your messages, be mindful of non-verbal communication, address conflicts promptly and constructively, and adapt your communication style to different situations and colleagues. Remember that effective communication reduces misunderstandings and builds stronger professional relationships.",
+    "tags": ["communication", "workplace relationships", "conflict resolution"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  },
+  {
+    "id": 5,
+    "title": "Mindfulness Practices for Busy Professionals",
+    "author": "Corporate Wellness Program",
+    "content": "Mindfulness can help professionals manage stress and improve focus. Simple practices include: taking short breathing breaks throughout the day, practicing mindful eating during lunch, conducting a body scan during moments of tension, implementing a mindful transition between work and home, and starting the day with a brief meditation session. Even a few minutes of mindfulness can make a significant difference in your workday.",
+    "tags": ["mindfulness", "stress reduction", "focus"],
+    "likes": 0,
+    "dislikes": 0,
+    "ratings": [],
+    "averageRating": 0
+  }
+]
