@@ -1,0 +1,71 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f5f5f5"/>
+  
+  <!-- Water bodies (Sydney Harbour) -->
+  <path d="M0 120 Q50 100 120 110 Q180 105 250 115 Q320 120 400 125 L400 180 Q350 175 280 170 Q200 165 120 175 Q50 180 0 185 Z" fill="#a6cee3" stroke="#7fb3d3" stroke-width="1"/>
+  
+  <!-- Parks and green areas -->
+  <ellipse cx="80" cy="60" rx="35" ry="25" fill="#b2df8a"/>
+  <rect x="280" y="200" width="80" height="60" rx="8" fill="#b2df8a"/>
+  <ellipse cx="320" cy="80" rx="25" ry="20" fill="#b2df8a"/>
+  
+  <!-- Major roads -->
+  <line x1="0" y1="90" x2="400" y2="95" stroke="#ffffff" stroke-width="4"/>
+  <line x1="0" y1="200" x2="400" y2="205" stroke="#ffffff" stroke-width="4"/>
+  <line x1="150" y1="0" x2="155" y2="300" stroke="#ffffff" stroke-width="3"/>
+  <line x1="250" y1="0" x2="255" y2="300" stroke="#ffffff" stroke-width="3"/>
+  
+  <!-- Secondary roads -->
+  <line x1="0" y1="50" x2="400" y2="52" stroke="#ffffff" stroke-width="2"/>
+  <line x1="0" y1="150" x2="400" y2="152" stroke="#ffffff" stroke-width="2"/>
+  <line x1="0" y1="250" x2="400" y2="252" stroke="#ffffff" stroke-width="2"/>
+  <line x1="80" y1="0" x2="82" y2="300" stroke="#ffffff" stroke-width="2"/>
+  <line x1="320" y1="0" x2="322" y2="300" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- City blocks -->
+  <rect x="160" y="100" width="30" height="40" fill="#e0e0e0" stroke="#cccccc" stroke-width="1"/>
+  <rect x="200" y="95" width="25" height="50" fill="#e0e0e0" stroke="#cccccc" stroke-width="1"/>
+  <rect x="230" y="105" width="35" height="35" fill="#e0e0e0" stroke="#cccccc" stroke-width="1"/>
+  
+  <!-- Residential areas -->
+  <rect x="20" y="20" width="100" height="60" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1" rx="3"/>
+  <rect x="300" y="30" width="80" height="40" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1" rx="3"/>
+  <rect x="50" y="220" width="120" height="70" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1" rx="3"/>
+  
+  <!-- Sydney Harbour Bridge representation -->
+  <line x1="120" y1="115" x2="180" y2="112" stroke="#8c8c8c" stroke-width="3"/>
+  <line x1="140" y1="105" x2="140" y2="120" stroke="#8c8c8c" stroke-width="2"/>
+  <line x1="160" y1="104" x2="160" y2="119" stroke="#8c8c8c" stroke-width="2"/>
+  
+  <!-- Sydney Opera House area -->
+  <ellipse cx="200" cy="130" rx="15" ry="10" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
+  
+  <!-- Beaches -->
+  <ellipse cx="350" cy="250" rx="40" ry="15" fill="#fff2cc"/>
+  
+  <!-- Small streets grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.7">
+    <line x1="0" y1="30" x2="400" y2="32"/>
+    <line x1="0" y1="70" x2="400" y2="72"/>
+    <line x1="0" y1="130" x2="400" y2="132"/>
+    <line x1="0" y1="170" x2="400" y2="172"/>
+    <line x1="0" y1="230" x2="400" y2="232"/>
+    <line x1="0" y1="270" x2="400" y2="272"/>
+    <line x1="40" y1="0" x2="42" y2="300"/>
+    <line x1="120" y1="0" x2="122" y2="300"/>
+    <line x1="180" y1="0" x2="182" y2="300"/>
+    <line x1="280" y1="0" x2="282" y2="300"/>
+    <line x1="360" y1="0" x2="362" y2="300"/>
+  </g>
+  
+  <!-- Landmarks and points of interest -->
+  <circle cx="200" cy="120" r="3" fill="#ff6b6b"/>
+  <circle cx="160" cy="80" r="2" fill="#4ecdc4"/>
+  <circle cx="280" cy="160" r="2" fill="#45b7d1"/>
+  
+  <!-- Text labels (small) -->
+  <text x="200" y="135" font-family="Arial, sans-serif" font-size="8" fill="#666" text-anchor="middle">CBD</text>
+  <text x="80" y="75" font-family="Arial, sans-serif" font-size="7" fill="#666" text-anchor="middle">Park</text>
+  <text x="350" y="265" font-family="Arial, sans-serif" font-size="7" fill="#666" text-anchor="middle">Beach</text>
+</svg>

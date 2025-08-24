@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .debug-info {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>地理位置功能调试测试</h1>
+    
+    <div class="debug-info">
+        <h3>环境检查</h3>
+        <p><strong>协议:</strong> <span id="protocol"></span></p>
+        <p><strong>主机名:</strong> <span id="hostname"></span></p>
+        <p><strong>地理位置支持:</strong> <span id="geolocation-support"></span></p>
+        <p><strong>权限状态:</strong> <span id="permission-status">检查中...</span></p>
+    </div>
+    
+    <button id="request-location" onclick="testGeolocation()">测试获取位置</button>
+    
+    <div id="result" class="debug-info" style="display: none;">
+        <h3>结果</h3>
+        <div id="result-content"></div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>控制台日志</h3>
+        <div id="console-log"></div>
+    </div>
+
+    <script>
+        // 重写console.log来显示在页面上
+        const originalLog = console.log;
+        const logContainer = document.getElementById('console-log');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = document.createElement('div');
+            logEntry.textContent = new Date().toLocaleTimeString() + ': ' + args.join(' ');
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+        
+        // 检查环境
+        document.getElementById('protocol').textContent = window.location.protocol;
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('geolocation-support').textContent = navigator.geolocation ? '支持' : '不支持';
+        
+        // 检查权限状态
+        if (navigator.permissions) {
+            navigator.permissions.query({name: 'geolocation'}).then(function(result) {
+                document.getElementById('permission-status').textContent = result.state;
+                console.log('地理位置权限状态:', result.state);
+            }).catch(function(error) {
+                document.getElementById('permission-status').textContent = '无法检查权限';
+                console.log('权限检查错误:', error);
+            });
+        } else {
+            document.getElementById('permission-status').textContent = '不支持权限API';
+        }
+        
+        function testGeolocation() {
+            console.log('开始测试地理位置功能');
+            const button = document.getElementById('request-location');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('result-content');
+            
+            button.disabled = true;
+            button.textContent = '获取中...';
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = '<p>正在请求位置权限...</p>';
+            
+            // 检查是否支持地理位置
+            if (!navigator.geolocation) {
+                console.log('浏览器不支持地理位置');
+                resultContent.innerHTML = '<p class="error">错误: 浏览器不支持地理位置功能</p>';
+                button.disabled = false;
+                button.textContent = '重新测试';
+                return;
+            }
+            
+            // 检查安全环境
+            if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                console.log('不安全的环境:', window.location.protocol, window.location.hostname);
+                resultContent.innerHTML = '<p class="error">错误: 地理位置功能需要HTTPS或localhost环境</p>';
+                button.disabled = false;
+                button.textContent = '重新测试';
+                return;
+            }
+            
+            console.log('环境检查通过，开始请求位置');
+            
+            // 请求地理位置
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    console.log('位置获取成功:', position);
+                    resultContent.innerHTML = `
+                        <div class="success">
+                            <h4>位置获取成功!</h4>
+                            <p><strong>纬度:</strong> ${position.coords.latitude}</p>
+                            <p><strong>经度:</strong> ${position.coords.longitude}</p>
+                            <p><strong>精度:</strong> ${position.coords.accuracy} 米</p>
+                            <p><strong>时间戳:</strong> ${new Date(position.timestamp).toLocaleString()}</p>
+                        </div>
+                    `;
+                    button.disabled = false;
+                    button.textContent = '重新测试';
+                },
+                function(error) {
+                    console.log('位置获取失败:', error);
+                    let errorMessage = '';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = '用户拒绝了地理位置请求。请检查浏览器设置并允许位置访问。';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = '位置信息不可用。';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = '获取位置超时。';
+                            break;
+                        default:
+                            errorMessage = '发生未知错误。';
+                            break;
+                    }
+                    resultContent.innerHTML = `
+                        <div class="error">
+                            <h4>位置获取失败</h4>
+                            <p><strong>错误代码:</strong> ${error.code}</p>
+                            <p><strong>错误信息:</strong> ${errorMessage}</p>
+                            <p><strong>详细信息:</strong> ${error.message}</p>
+                        </div>
+                    `;
+                    button.disabled = false;
+                    button.textContent = '重新测试';
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
+        
+        console.log('调试页面加载完成');
+    </script>
+</body>
+</html>

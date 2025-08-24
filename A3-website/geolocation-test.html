@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地理位置API测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 3px;
+        }
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .success {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .loading {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <h1>地理位置API测试工具</h1>
+    
+    <div class="test-section">
+        <h2>1. 基础环境检查</h2>
+        <div id="env-check"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. 地理位置API测试</h2>
+        <button onclick="testGeolocation()">测试地理位置获取</button>
+        <div id="geo-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 权限状态检查</h2>
+        <button onclick="checkPermissions()">检查权限状态</button>
+        <div id="permission-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. 控制台日志</h2>
+        <div id="console-log"></div>
+    </div>
+
+    <script>
+        // 重写console.log以显示在页面上
+        const originalLog = console.log;
+        const logContainer = document.getElementById('console-log');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = document.createElement('div');
+            logEntry.className = 'result';
+            logEntry.textContent = new Date().toLocaleTimeString() + ': ' + args.join(' ');
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+        
+        // 环境检查
+        function checkEnvironment() {
+            const envCheck = document.getElementById('env-check');
+            let results = [];
+            
+            // 检查协议
+            const protocol = window.location.protocol;
+            results.push(`协议: ${protocol} ${protocol === 'https:' || window.location.hostname === 'localhost' ? '✓' : '✗ (需要HTTPS或localhost)'}`);
+            
+            // 检查主机名
+            results.push(`主机名: ${window.location.hostname}`);
+            
+            // 检查navigator.geolocation
+            const hasGeolocation = 'geolocation' in navigator;
+            results.push(`地理位置API支持: ${hasGeolocation ? '✓ 支持' : '✗ 不支持'}`);
+            
+            // 检查用户代理
+            results.push(`浏览器: ${navigator.userAgent}`);
+            
+            envCheck.innerHTML = results.map(r => `<div class="result">${r}</div>`).join('');
+        }
+        
+        // 测试地理位置
+        function testGeolocation() {
+            const resultDiv = document.getElementById('geo-result');
+            resultDiv.innerHTML = '<div class="result loading">正在获取位置信息...</div>';
+            
+            console.log('开始地理位置测试');
+            
+            if (!navigator.geolocation) {
+                resultDiv.innerHTML = '<div class="result error">浏览器不支持地理位置API</div>';
+                console.log('浏览器不支持地理位置API');
+                return;
+            }
+            
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+            
+            console.log('调用getCurrentPosition，选项:', options);
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    console.log('地理位置获取成功:', position);
+                    const coords = position.coords;
+                    const result = `
+                        <div class="result success">
+                            <strong>位置获取成功！</strong><br>
+                            纬度: ${coords.latitude}<br>
+                            经度: ${coords.longitude}<br>
+                            精度: ${coords.accuracy}米<br>
+                            时间戳: ${new Date(position.timestamp).toLocaleString()}
+                        </div>
+                    `;
+                    resultDiv.innerHTML = result;
+                },
+                function(error) {
+                    console.log('地理位置获取失败:', error);
+                    let errorMsg = '';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg = '用户拒绝了地理位置请求';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg = '位置信息不可用';
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg = '请求超时';
+                            break;
+                        default:
+                            errorMsg = '未知错误';
+                            break;
+                    }
+                    resultDiv.innerHTML = `<div class="result error">错误 (${error.code}): ${errorMsg}<br>详细信息: ${error.message}</div>`;
+                },
+                options
+            );
+        }
+        
+        // 检查权限
+        async function checkPermissions() {
+            const resultDiv = document.getElementById('permission-result');
+            
+            if (!navigator.permissions) {
+                resultDiv.innerHTML = '<div class="result error">浏览器不支持权限API</div>';
+                return;
+            }
+            
+            try {
+                const permission = await navigator.permissions.query({name: 'geolocation'});
+                console.log('地理位置权限状态:', permission.state);
+                
+                let statusClass = 'result';
+                if (permission.state === 'granted') statusClass += ' success';
+                else if (permission.state === 'denied') statusClass += ' error';
+                
+                resultDiv.innerHTML = `<div class="${statusClass}">权限状态: ${permission.state}</div>`;
+                
+                permission.onchange = function() {
+                    console.log('权限状态变更为:', this.state);
+                    resultDiv.innerHTML = `<div class="${statusClass}">权限状态: ${this.state} (已变更)</div>`;
+                };
+            } catch (error) {
+                console.log('权限检查失败:', error);
+                resultDiv.innerHTML = `<div class="result error">权限检查失败: ${error.message}</div>`;
+            }
+        }
+        
+        // 页面加载时自动检查环境
+        window.onload = function() {
+            checkEnvironment();
+            console.log('地理位置测试工具已加载');
+        };
+    </script>
+</body>
+</html>
